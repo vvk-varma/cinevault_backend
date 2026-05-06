@@ -18,6 +18,8 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 
 MONGO_URI = os.getenv("MONGO_URI", "")
 TMDB_KEY  = os.getenv("TMDB_API_KEY", "")
+if not MONGO_URI:
+    raise RuntimeError("MONGO_URI environment variable is not set")
 client = AsyncIOMotorClient(MONGO_URI)
 db = client.cinevault
 
